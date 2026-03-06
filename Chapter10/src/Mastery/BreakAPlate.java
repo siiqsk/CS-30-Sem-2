@@ -63,7 +63,7 @@ public class BreakAPlate implements ActionListener {
 	 */
 	private void initialize() {
 		
-		plate = new ImageIcon("/Chapter10/src/Mastery/plate.jpg");
+		plate = new ImageIcon("../Chapter10/src/Mastery/plate.jpg");
 		broken1 = new ImageIcon("../Chapter10/src/skillbuilder/die2.gif");
 		broken2 = new ImageIcon("../Chapter10/src/skillbuilder/die3.gif");
 		broken3 = new ImageIcon("../Chapter10/src/skillbuilder/die4.gif");
