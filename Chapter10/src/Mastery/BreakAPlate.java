@@ -116,8 +116,6 @@ public class BreakAPlate implements ActionListener {
 			
 			button.setActionCommand("stop");
 			a.setActionCommand("end");	
-			
-		
     }
 	
 	
@@ -205,7 +203,7 @@ public class BreakAPlate implements ActionListener {
 		
 		p3Stat = new JLabel(" ");
 		p3Stat.setFont(new Font("Wawati SC", Font.PLAIN, 13));
-		p3Stat.setBounds(245, 96, 61, 16);
+		p3Stat.setBounds(248, 96, 61, 16);
 		panel_1.add(p3Stat);
 		plate1.addActionListener(this);
 		plate3.addActionListener(this);
