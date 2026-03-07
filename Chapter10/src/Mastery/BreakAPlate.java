@@ -31,18 +31,94 @@ import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.border.BevelBorder;
+import java.awt.Font;
 
 public class BreakAPlate implements ActionListener {
 	
 	private ImageIcon plate, broken1, broken2, broken3, tiger, sticker ;
 	private JButton plate1, plate2, plate3, button; 
-	private JLabel status, prize, p1Stat, p2Stat, p3Stat, timerTask;
+	private JLabel status, prize, p1Stat, p2Stat, p3Stat;
 	private JFrame frmBreakaplate;
 	private String gameStat = "off";
 	private Boolean win;
-	private int shoot, shape;
+	private int shoot, shape, counter;
 	List<ImageIcon> plates = new ArrayList<>();
 	Timer timer = new Timer();
+	
+	public void hit(JButton a, JLabel b){
+		
+		if (gameStat.equals("on")) {
+		
+		counter++;
+		
+		shoot = (int)(2*Math.random() + 1);
+			
+			if (shoot == 1) {
+				
+				shape = (int)(3*Math.random());
+				a.setIcon(plates.get(shape));
+				
+				b.setForeground(new Color(44, 150, 104));
+				b.setText(" HIT!");
+				
+				timer.schedule(new TimerTask() {
+				    public void run() {
+				        b.setText(" ");
+				    }
+				}, 500);	
+			}else {
+				
+				b.setForeground(Color.red);
+				b.setText("MISS!");
+				
+				timer.schedule(new TimerTask() {
+				    public void run() {
+				        b.setText(" ");
+				    }
+				}, 500);
+				
+				win = false;
+			}}
+			
+			if(counter == 3) {
+			
+				if(win == true) {
+					
+					button.setForeground(new Color(44, 150, 104));
+					button.setText("YOU WIN!");
+					status.setText("             prize: tiger");
+					timer.schedule(new TimerTask() {
+					    public void run() {
+					    	button.setForeground(Color.black);
+					    	button.setText("Reset");
+					    	
+					    }
+					}, 1200);
+					
+					prize.setIcon(tiger);
+				
+				} else {
+					
+					button.setText("YOU LOOSE!");
+					status.setText("           prize: sticker");
+					timer.schedule(new TimerTask() {
+					    public void run() {
+					    	button.setForeground(Color.black);
+					        button.setText("Reset");
+					        
+					    }
+					}, 1200);
+					
+					prize.setIcon(sticker);}
+			
+			}
+			
+			button.setActionCommand("stop");
+			a.setActionCommand("end");	
+			
+		
+    }
 	
 	
 	/**
@@ -66,6 +142,8 @@ public class BreakAPlate implements ActionListener {
 	 */
 	public BreakAPlate() {
 		initialize();
+		
+		
 	}
 
 	/**
@@ -77,70 +155,80 @@ public class BreakAPlate implements ActionListener {
 		broken1 = new ImageIcon("../Chapter10/src/Mastery/broken1.jpg");
 		broken2 = new ImageIcon("../Chapter10/src/Mastery/broken2.jpg");
 		broken3 = new ImageIcon("../Chapter10/src/Mastery/broken3.jpg");
-		tiger = new ImageIcon("../Chapter10/src/Mastery/tiger.jpg");
-		sticker = new ImageIcon("../Chapter10/src/Mastery/sticker.jpg");
+		tiger = new ImageIcon("../Chapter10/src/Mastery/tiger.gif");
+		sticker = new ImageIcon("../Chapter10/src/Mastery/sticker.gif");
 		
 		frmBreakaplate = new JFrame();
 		frmBreakaplate.setTitle("BreakAPlate");
-		frmBreakaplate.setBounds(100, 100, 400, 299);
+		frmBreakaplate.setBounds(100, 100, 400, 379);
 		frmBreakaplate.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(254, 255, 255));
+		panel.setBackground(new Color(232, 247, 255));
 		frmBreakaplate.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		plate1 = new JButton(plate);
-		plate1.setBounds(37, 34, 80, 80);
-		plate1.setFocusPainted(false);
-		plate1.setBorderPainted(false);
-		plate1.addActionListener(this);
-		
-		panel.add(plate1);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(152, 185, 214), null, null, null));
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(35, 31, 327, 118);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
 		
 		plate2 = new JButton(plate);
-		plate2.setBounds(158, 34, 80, 80);
+		plate2.setBounds(119, 17, 80, 80);
+		panel_1.add(plate2);
 		plate2.setFocusPainted(false);
 		plate2.setBorderPainted(false);
-		plate2.addActionListener(this);
-		
-		panel.add(plate2);
 		
 		plate3 = new JButton(plate);
-		plate3.setBounds(279, 34, 80, 80);
+		plate3.setBounds(226, 17, 80, 80);
+		panel_1.add(plate3);
 		plate3.setFocusPainted(false);
 		plate3.setBorderPainted(false);
+		
+		plate1 = new JButton(plate);
+		plate1.setBounds(17, 17, 80, 80);
+		panel_1.add(plate1);
+		plate1.setFocusPainted(false);
+		plate1.setBorderPainted(false);
+		
+		p1Stat = new JLabel(" ");
+		p1Stat.setFont(new Font("Wawati SC", Font.PLAIN, 13));
+		p1Stat.setBounds(42, 96, 47, 16);
+		panel_1.add(p1Stat);
+		
+		p2Stat = new JLabel(" ");
+		p2Stat.setFont(new Font("Wawati SC", Font.PLAIN, 13));
+		p2Stat.setBounds(141, 96, 61, 16);
+		panel_1.add(p2Stat);
+		
+		p3Stat = new JLabel(" ");
+		p3Stat.setFont(new Font("Wawati SC", Font.PLAIN, 13));
+		p3Stat.setBounds(245, 96, 61, 16);
+		panel_1.add(p3Stat);
+		plate1.addActionListener(this);
 		plate3.addActionListener(this);
+		plate2.addActionListener(this);
 		
-		panel.add(plate3);
-		
-		status = new JLabel("       Press: Play to start!");
-		status.setBounds(110, 170, 207, 16);
+		status = new JLabel("      Press: [Play] to start!");
+		status.setFont(new Font("Wawati SC", Font.PLAIN, 13));
+		status.setBounds(116, 195, 207, 16);
 		panel.add(status);
 		
 		prize = new JLabel("");
-		prize.setBounds(158, 177, 80, 80);
+		prize.setForeground(Color.WHITE);
+		prize.setBounds(147, 223, 108, 99);
 		panel.add(prize);
 		
 		button = new JButton("Play");
+		button.setFont(new Font("Wawati SC", Font.BOLD, 14));
 		button.setForeground(new Color(44, 150, 104));
-		button.setBounds(138, 136, 117, 29);
+		button.setBounds(138, 161, 117, 29);
 		
 		button.setActionCommand("play");
 		button.addActionListener(this);
 		panel.add(button);
-		
-		p1Stat = new JLabel(" ");
-		p1Stat.setBounds(59, 115, 47, 16);
-		panel.add(p1Stat);
-		
-		p2Stat = new JLabel(" ");
-		p2Stat.setBounds(184, 115, 61, 16);
-		panel.add(p2Stat);
-		
-		p3Stat = new JLabel(" ");
-		p3Stat.setBounds(301, 115, 61, 16);
-		panel.add(p3Stat);
 		
 		plates.add(broken1);
 		plates.add(broken2);
@@ -170,9 +258,13 @@ public class BreakAPlate implements ActionListener {
 			button.setActionCommand("stop");
 			gameStat = "on";
 			
-			status.setText("Click the plates to shoot!");
+			counter = 0;
+			win = true;
+			
+			status.setText("  Click the plates to shoot!");
 			
 		}
+		
 		
 		if(eventName.equals("stop")) {
 			
@@ -184,119 +276,29 @@ public class BreakAPlate implements ActionListener {
 			plate2.setIcon(plate);
 			plate3.setIcon(plate);
 			
-			status.setText("       Press: Play to start!");
+			prize.setIcon(null);
+			
+			counter = 0;
+			win = true;
+			status.setText("       Press: [Play] to start!");
 			
 		}
 		
-			
 			if(eventName.equals("shoot1")) {
 				
-				if (gameStat.equals("on")) {
-					
-					shoot = (int)(2*Math.random() + 1);
-						
-						if (shoot == 1) {
-							
-							shape = (int)(3*Math.random());
-							plate1.setIcon(plates.get(shape));
-							
-							p1Stat.setForeground(new Color(44, 150, 104));
-							p1Stat.setText(" HIT!");
-							
-							timer.schedule(new TimerTask() {
-							    public void run() {
-							        p1Stat.setText(" ");
-							    }
-							}, 500);}
-							
-						else {
-							
-							p1Stat.setForeground(Color.red);
-							p1Stat.setText("MISS!");
-							
-							timer.schedule(new TimerTask() {
-							    public void run() {
-							        p1Stat.setText(" ");
-							    }
-							}, 500);
-							
-							win = false;
-						}
-						
-						plate1.setActionCommand("end1");
-						
-				}
-			}else if(eventName.equals("shoot2")){
+				hit(plate1, p1Stat);
 				
-				if (gameStat.equals("on")) {
-					
-					shoot = (int)(2*Math.random() + 1);
-						
-						if (shoot == 1) {
-							
-							shape = (int)(3*Math.random());
-							plate2.setIcon(plates.get(shape));
-							
-							p2Stat.setForeground(new Color(44, 150, 104));
-							p2Stat.setText(" HIT!");
-							
-							timer.schedule(new TimerTask() {
-							    public void run() {
-							        p2Stat.setText(" ");
-							    }
-							}, 500);}
-							
-						else {
-							
-							p2Stat.setForeground(Color.red);
-							p2Stat.setText("MISS!");
-							
-							timer.schedule(new TimerTask() {
-							    public void run() {
-							        p2Stat.setText(" ");
-							    }
-							}, 500);
-							
-							win = false;
-						}
-						
-						plate2.setActionCommand("end2");
-				}
-			}else if (eventName.equals("shoot3")){
 				
-				if (gameStat.equals("on")) {
-					
-					shoot = (int)(2*Math.random() + 1);
-						
-						if (shoot == 1) {
-							
-							shape = (int)(3*Math.random());
-							plate3.setIcon(plates.get(shape));
-							
-							p3Stat.setForeground(new Color(44, 150, 104));
-							p3Stat.setText(" HIT!");
-							
-							timer.schedule(new TimerTask() {
-							    public void run() {
-							        p3Stat.setText(" ");
-							    }
-							}, 500);}
-							
-						else {
-							
-							p3Stat.setForeground(Color.red);
-							p3Stat.setText("MISS!");
-							
-							timer.schedule(new TimerTask() {
-							    public void run() {
-							        p3Stat.setText(" ");
-							    }
-							}, 500);
-							
-							win = false;
-						}
-						
-						plate3.setActionCommand("end3");
-			}}
+			} else if (eventName.equals("shoot2")){
+				
+				hit(plate2, p2Stat);
+				
+			} else if (eventName.equals("shoot3")){
+				
+				hit(plate3, p3Stat);
+				
+			}
+			
 	
-	}}
+	}	
+}
