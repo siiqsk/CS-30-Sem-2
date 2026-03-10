@@ -46,6 +46,7 @@ public class BreakAPlate implements ActionListener {
 	List<ImageIcon> plates = new ArrayList<>();
 	Timer timer = new Timer();
 	
+	
 	public void hit(JButton a, JLabel b){
 		
 		if (gameStat.equals("on")) {
