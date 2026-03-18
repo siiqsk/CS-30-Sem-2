@@ -206,6 +206,7 @@ public class BreakAPlate implements ActionListener {
 		p3Stat.setFont(new Font("Wawati SC", Font.PLAIN, 13));
 		p3Stat.setBounds(248, 96, 61, 16);
 		panel_1.add(p3Stat);
+		
 		plate1.addActionListener(this);
 		plate3.addActionListener(this);
 		plate2.addActionListener(this);
