@@ -86,8 +86,8 @@ public class TicTacToe implements ActionListener {
 	 */
 	private void initialize() {
 		
-		cat2 = new ImageIcon("../Chapter10/src/Mastery/tofu (1).jpeg");
-		cat = new ImageIcon("../Chapter10/src/Mastery/cat1.jpeg");
+		cat2 = new ImageIcon("../Chapter10/src/Mastery/tofu.jpg");
+		cat = new ImageIcon("../Chapter10/src/Mastery/cat1.jpg");
 		catDance = new ImageIcon("../Chapter10/src/Mastery/catdance.gif");
 		hamster = new ImageIcon("../Chapter10/src/Mastery/hamster.gif");
 		
@@ -171,7 +171,7 @@ public class TicTacToe implements ActionListener {
 		turnStat = new JLabel("");
 		turnStat.setForeground(new Color(198, 144, 172));
 		turnStat.setFont(new Font("Silom", Font.PLAIN, 29));
-		turnStat.setBounds(28, 27, 160, 58);
+		turnStat.setBounds(22, 27, 166, 58);
 		turnStat.setVisible(false);
 		gamePanel.add(turnStat);
 		
@@ -191,7 +191,6 @@ public void actionPerformed(ActionEvent e) {
 		
 		String eventName = e.getActionCommand();
 		
-		System.out.println(eventName);
 		
 		if(eventName.equals("reset")) {
 			
@@ -306,7 +305,7 @@ public void actionPerformed(ActionEvent e) {
 
 				    }
 				    
-				}, 800);
+				}, 400);
 				
 				
 				
@@ -320,8 +319,6 @@ private void computerTurn() {
 		
 		int i = (int)(3*Math.random()); 
 		int t = (int)(3*Math.random()); 
-		
-		System.out.println(i + "and" + t);
 		
 		computerSpot = "box" + i + t;
 		
@@ -356,8 +353,6 @@ private void moves(String spotP1, String spotP2) {
         int i = boxNum.charAt(3) - '0';
         int t = boxNum.charAt(4) - '0';
 
-        System.out.println(i);
-        System.out.println(t);
 
         if ((space[i][t].getText().equals(" "))){
         	
@@ -382,8 +377,7 @@ private void moves(String spotP1, String spotP2) {
           
             }
         	
-        	
-        	System.out.println(movesMade);
+        
         	
             if (currPlayer.equals(player1)) {
             	
@@ -404,7 +398,7 @@ private void moves(String spotP1, String spotP2) {
 	
 	
 	winner();
-	System.out.println(winner);
+	
 	
 }
 private void winner() {
