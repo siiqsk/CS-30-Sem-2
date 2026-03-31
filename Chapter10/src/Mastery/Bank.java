@@ -44,7 +44,7 @@ public class Bank
 	 	acctIndex = accounts.indexOf(acctToMatch);		//retrieve location of account
 	 	if (acctIndex > -1) {
 	 		accounts.remove(acctIndex);					//remove account
-	 		return("Account removed.");
+	 		return("   Account removed.");
 	 	} else {
 	 		return("Account does not exist.");
 	 	}
@@ -71,9 +71,17 @@ public class Bank
 	 			accounts.set(acctIndex, acct);			//replace object with updated object
 	 			return(acct.toString());
 	 		} else if (transCode == 2) {
-	 			acct.withdrawal(amt);
-	 			accounts.set(acctIndex, acct);			//replace object with updated object
-	 			return(acct.toString());
+	 			
+	 			if (acct.withdrawal(amt) == true) {
+	 			
+		 			accounts.set(acctIndex, acct);			//replace object with updated object
+		 			return(acct.toString());
+	 			
+	 			}
+	 			
+	 			else {
+	 				return("Not enough funds in account.");
+	 			}
 	 		}
 	 	}
 	 	return("Account does not exist.");

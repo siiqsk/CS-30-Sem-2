@@ -70,11 +70,13 @@ public class Account
 	 * pre: none
 	 * post: The balance has been decreased by the amount withdrawn.
 	 */
-	public void withdrawal(double amt) {
+	public boolean withdrawal(double amt) {
 	 	if (amt <= balance) {
 	 		balance -= amt;
+	 		return true;
 	 	} else {
-	 		System.out.println("Not enough money in account.");
+	 		//System.out.println("Not enough money in account.");
+	 		return false;
 	 	}
 	}
 	
@@ -104,10 +106,13 @@ public class Account
 	public String toString() {
 		String accountString;
 		NumberFormat money = NumberFormat.getCurrencyInstance();
+		
+		accountString = "<html>";
+		accountString += acctID;
+		accountString += "<br>" + cust.toString();
+		accountString += "<br>Current balance is " + money.format(balance);
+		accountString += "</html>";
 
-		accountString = acctID + " ";	//changed for Chapter 11 Exer 1
-		accountString += cust.toString();
-		accountString += "Current balance is " + money.format(balance);
 	 	return(accountString);
 	}
 
