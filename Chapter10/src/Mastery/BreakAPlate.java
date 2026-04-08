@@ -36,6 +36,7 @@ import java.awt.Font;
 
 public class BreakAPlate implements ActionListener {
 	
+	// Initialize variables and GUI components
 	private ImageIcon plate, broken1, broken2, broken3, tiger, sticker ;
 	private JButton plate1, plate2, plate3, button; 
 	private JLabel status, prize, p1Stat, p2Stat, p3Stat;

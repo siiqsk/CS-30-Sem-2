@@ -34,27 +34,22 @@ import javax.swing.border.LineBorder;
 //Main class for the Local Bank application
 public class LocalBank implements ActionListener{
 
-	// Initialize the following:
+	// Initialize variables + GUI components 
 	
-	//Variables used for transactions
-	String ID; // Stores account ID entered by the user
-	Double amt;  // Stores deposit or withdrawal amount
+	String ID; 
+	Double amt;  
 	
-	// Main window frame
 	JFrame frmLocalbank;
-	
-	// Panels used for different screens in the program
+
 	JPanel mainPanel, buttonPanel, newAccountPanel, accountPanel, deletePanel, 
 	depositAccountPanel,deleteAccountPanel, depositPanel, withdrawalAccountPanel,
 	withdrawalPanel, balanceAccountPanel, balanceInfoPanel,balancePanel ;
 
-	// Buttons for bank actions
 	JButton withdrawalButton,addAccountButton, depositButton, removeAccountButton,
 	balanceButton, createAccountButton, returnButton, returnButton2, depositAccountButton,
 	returnButton3, deleteAccountButton, withdrawalAccountButton, returnButton4,
 	balanceAccountButton, returnButton_1;
 	
-	// Labels used to display text and information to the user
 	JLabel welcomeHeader, bankHeader, laceBacking, selectionHeader, pearl1, pearl2,
 	lastNameLabel, balanceLabel, accountLabel, firstNameLabel, addAccountHeader, errorLabel,
 	successLabel, accountIDLabel, depositHeader, depositAccountHeader, accountLabel3, 
@@ -64,14 +59,12 @@ public class LocalBank implements ActionListener{
 	accountIDLabel2,title12_1, title22_1, title32_1, deleteAccountHeader,accountLabel2,
 	accountDeletedText, accountIDheader; 
 	
-	// Text fields where the user inputs information
 	JTextField firstNameBox, lastNameBox, balanceBox, accountIDBox2, withdrawalBox, accountIDBox, 
 	depositBox, accountBalanceBox, deleteAccountBox;
 	
 	// Bank object that stores and manages accounts
 	Bank easySave = new Bank();
-	
-	// Timer used in program to manage pauses
+
 	Timer timer = new Timer();
 	
 	/**
