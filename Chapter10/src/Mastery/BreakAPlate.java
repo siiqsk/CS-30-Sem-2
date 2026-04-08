@@ -34,7 +34,9 @@ import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
 
-public class BreakAPlate implements ActionListener {
+public class BreakAPlate implements ActionListener 
+
+{
 	
 	// Initialize variables and GUI components
 	private ImageIcon plate, broken1, broken2, broken3, tiger, sticker ;
@@ -47,75 +49,126 @@ public class BreakAPlate implements ActionListener {
 	List<ImageIcon> plates = new ArrayList<>();
 	Timer timer = new Timer();
 	
-	
-	public void hit(JButton a, JLabel b){
+	//Method to determine hit outcome & output winner if found
+	public void hit(JButton a, JLabel b)
+	{
 		
-		if (gameStat.equals("on")) {
+		//If the game status is equal to on
+		if (gameStat.equals("on")) 
+		{
 		
+		//Add 1 throw to the counter
 		counter++;
 		
+		//Generate a random number from 1-2 to determine hit outcome
 		shoot = (int)(2*Math.random() + 1);
 			
-			if (shoot == 1) {
+			// If random number is equal to 1
+			if (shoot == 1) 
+			{
 				
+				//Generate a random number 1-3 to select broken plate icon
 				shape = (int)(3*Math.random());
+				
+				//Set plate's icon to chosen icon
 				a.setIcon(plates.get(shape));
 				
+				//Change hit status color to green
 				b.setForeground(new Color(44, 150, 104));
+				
+				//Set text to reflect outcome
 				b.setText(" HIT!");
 				
-				timer.schedule(new TimerTask() {
-				    public void run() {
+				//After 0.5 seconds, clear status label
+				timer.schedule(new TimerTask() 
+				{
+				    public void run() 
+				    {
 				        b.setText(" ");
 				    }
 				}, 500);	
-			}else {
 				
+			// If random number is equal to 2
+			}
+			else 
+			{
+				
+				// Set hit status color to red
 				b.setForeground(Color.red);
+				
+				// Set text to reflect outcome
 				b.setText("MISS!");
 				
-				timer.schedule(new TimerTask() {
-				    public void run() {
+				// After 0.5 seconds, clear status label
+				timer.schedule(new TimerTask() 
+				{
+				    public void run() 
+				    {
 				        b.setText(" ");
 				    }
 				}, 500);
 				
+				// If plate is not successfully hit, change win stat to false
 				win = false;
-			}}
+			}
+		}
 			
-			if(counter == 3) {
-			
-				if(win == true) {
+			// If all 3 plates are attempted 
+			if(counter == 3) 
+			{
+				
+				// If all plates are successfully hit
+				if(win == true) 
+				{
 					
+					// Change button text color + change text to reflect win
 					button.setForeground(new Color(44, 150, 104));
 					button.setText("YOU WIN!");
+					
+					// Change prize text
 					status.setText("             prize: tiger");
-					timer.schedule(new TimerTask() {
-					    public void run() {
+					
+					// After 1.2 seconds, change button text and color
+					timer.schedule(new TimerTask() 
+					{
+					    public void run() 
+					    {
 					    	button.setForeground(Color.black);
 					    	button.setText("Reset");
 					    	
 					    }
 					}, 1200);
 					
+					// Change prize icon to reflect outcome
 					prize.setIcon(tiger);
 				
-				} else {
+				// If one or more plates are not successfully hit
+				}
+				else 
+				{
 					
+					// Change button text color + change text to reflect loss
 					button.setText("YOU LOOSE!");
 					status.setText("           prize: sticker");
-					timer.schedule(new TimerTask() {
-					    public void run() {
+					
+					// After 1.2 seconds, change button text and color
+					timer.schedule(new TimerTask() 
+					{
+					    public void run() 
+					    {
 					    	button.setForeground(Color.black);
 					        button.setText("Reset");
 					        
 					    }
 					}, 1200);
 					
-					prize.setIcon(sticker);}
+					// Change prize icon to reflect outcome
+					prize.setIcon(sticker);
+				}
 			
 			}
 			
+			// Change button commands to stop game
 			button.setActionCommand("stop");
 			a.setActionCommand("end");	
     }
@@ -124,13 +177,19 @@ public class BreakAPlate implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					BreakAPlate window = new BreakAPlate();
 					window.frmBreakaplate.setVisible(true);
-				} catch (Exception e) {
+				}
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -140,17 +199,19 @@ public class BreakAPlate implements ActionListener {
 	/**
 	 * Create the application.
 	 */
-	public BreakAPlate() {
-		initialize();
-		
+	public BreakAPlate() 
+	{
+		initialize(); // Initialize application
 		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		
+		// Initialize image icons
 		plate = new ImageIcon("../Chapter10/src/Mastery/plate.jpg");
 		broken1 = new ImageIcon("../Chapter10/src/Mastery/broken1.jpg");
 		broken2 = new ImageIcon("../Chapter10/src/Mastery/broken2.jpg");
@@ -158,16 +219,19 @@ public class BreakAPlate implements ActionListener {
 		tiger = new ImageIcon("../Chapter10/src/Mastery/tiger.gif");
 		sticker = new ImageIcon("../Chapter10/src/Mastery/sticker.gif");
 		
+		//Main JFrame
 		frmBreakaplate = new JFrame();
 		frmBreakaplate.setTitle("BreakAPlate");
 		frmBreakaplate.setBounds(100, 100, 400, 379);
 		frmBreakaplate.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//JPanels
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(232, 247, 255));
 		frmBreakaplate.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
+		//JPanels
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(152, 185, 214), null, null, null));
 		panel_1.setBackground(Color.WHITE);
@@ -175,6 +239,7 @@ public class BreakAPlate implements ActionListener {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
+		// Plates to be broken
 		plate2 = new JButton(plate);
 		plate2.setBounds(119, 17, 80, 80);
 		panel_1.add(plate2);
@@ -193,6 +258,7 @@ public class BreakAPlate implements ActionListener {
 		plate1.setFocusPainted(false);
 		plate1.setBorderPainted(false);
 		
+		// Plate hit status labels
 		p1Stat = new JLabel(" ");
 		p1Stat.setFont(new Font("Wawati SC", Font.PLAIN, 13));
 		p1Stat.setBounds(42, 96, 47, 16);
@@ -212,21 +278,23 @@ public class BreakAPlate implements ActionListener {
 		plate3.addActionListener(this);
 		plate2.addActionListener(this);
 		
+		// Game instruction label
 		status = new JLabel("      Press: [Play] to start!");
 		status.setFont(new Font("Wawati SC", Font.PLAIN, 13));
 		status.setBounds(116, 195, 207, 16);
 		panel.add(status);
 		
+		// Prize status label
 		prize = new JLabel("");
 		prize.setForeground(Color.WHITE);
 		prize.setBounds(147, 223, 108, 99);
 		panel.add(prize);
 		
+		// Play button
 		button = new JButton("Play");
 		button.setFont(new Font("Wawati SC", Font.BOLD, 14));
 		button.setForeground(new Color(44, 150, 104));
 		button.setBounds(138, 161, 117, 29);
-		
 		button.setActionCommand("play");
 		button.addActionListener(this);
 		panel.add(button);
@@ -238,12 +306,18 @@ public class BreakAPlate implements ActionListener {
 							
 	}
 	
-	public void actionPerformed(ActionEvent e) {
+	//When a button is pressed
+	public void actionPerformed(ActionEvent e) 
+	{
 		
+		//Set button's action command to variable "eventName"
 		String eventName = e.getActionCommand();
 		
-		if(eventName.equals("play")) {
+		// If button's event name is equal to "play"
+		if(eventName.equals("play")) 
+		{
 			
+			// Set all plates an action commands to unbroken plates
 			plate1.setIcon(plate);
 			plate1.setActionCommand("shoot1");
 			
@@ -253,48 +327,71 @@ public class BreakAPlate implements ActionListener {
 			plate3.setIcon(plate);
 			plate3.setActionCommand("shoot3");
 			
+			// Change button text + action command to stop
 			button.setText("Stop");
 			button.setForeground(Color.red);
 			
 			button.setActionCommand("stop");
+			
+			// Turn game on
 			gameStat = "on";
 			
+			// Set counter to 0
 			counter = 0;
+			
+			// Set winner to true
 			win = true;
 			
+			// Change status text
 			status.setText("  Click the plates to shoot!");
 			
 		}
 		
 		
-		if(eventName.equals("stop")) {
+		// If button's event name is equal to "stop"
+		if(eventName.equals("stop")) 
+		{
 			
+			// Reset button visuals
 			button.setForeground(new Color(44, 150, 104));
 			button.setActionCommand("play");
 			button.setText("Play");
 			
+			// Reset plate icons
 			plate1.setIcon(plate);
 			plate2.setIcon(plate);
 			plate3.setIcon(plate);
 			
 			prize.setIcon(null);
 			
+			// Reset game counters / win stat
 			counter = 0;
 			win = true;
 			status.setText("       Press: [Play] to start!");
 			
 		}
 		
-			if(eventName.equals("shoot1")) {
+			// If first plate is clicked
+			if(eventName.equals("shoot1")) 
 				
+			{
+				
+				// Perform method "hit" with the corresponding plate 
 				hit(plate1, p1Stat);
 				
+			} 
+			
+			else if (eventName.equals("shoot2"))
 				
-			} else if (eventName.equals("shoot2")){
+			{
 				
 				hit(plate2, p2Stat);
 				
-			} else if (eventName.equals("shoot3")){
+			} 
+			
+			else if (eventName.equals("shoot3"))
+				
+			{
 				
 				hit(plate3, p3Stat);
 				
