@@ -32,25 +32,26 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 //Main class for the Local Bank application
-public class LocalBank implements ActionListener{
+public class LocalBank implements ActionListener
+{
 
 	// Initialize variables + GUI components 
 	
-	String ID; 
-	Double amt;  
+	private String ID; 
+	private Double amt;  
 	
-	JFrame frmLocalbank;
+	private JFrame frmLocalbank;
 
-	JPanel mainPanel, buttonPanel, newAccountPanel, accountPanel, deletePanel, 
+	private JPanel mainPanel, buttonPanel, newAccountPanel, accountPanel, deletePanel, 
 	depositAccountPanel,deleteAccountPanel, depositPanel, withdrawalAccountPanel,
 	withdrawalPanel, balanceAccountPanel, balanceInfoPanel,balancePanel ;
 
-	JButton withdrawalButton,addAccountButton, depositButton, removeAccountButton,
+	private JButton withdrawalButton,addAccountButton, depositButton, removeAccountButton,
 	balanceButton, createAccountButton, returnButton, returnButton2, depositAccountButton,
 	returnButton3, deleteAccountButton, withdrawalAccountButton, returnButton4,
 	balanceAccountButton, returnButton_1;
 	
-	JLabel welcomeHeader, bankHeader, laceBacking, selectionHeader, pearl1, pearl2,
+	private JLabel welcomeHeader, bankHeader, laceBacking, selectionHeader, pearl1, pearl2,
 	lastNameLabel, balanceLabel, accountLabel, firstNameLabel, addAccountHeader, errorLabel,
 	successLabel, accountIDLabel, depositHeader, depositAccountHeader, accountLabel3, 
 	accountIDHeader, errorLabel2, successDepositLabel, withdrawalAccountHeader, accountLabel4,
@@ -59,24 +60,30 @@ public class LocalBank implements ActionListener{
 	accountIDLabel2,title12_1, title22_1, title32_1, deleteAccountHeader,accountLabel2,
 	accountDeletedText, accountIDheader; 
 	
-	JTextField firstNameBox, lastNameBox, balanceBox, accountIDBox2, withdrawalBox, accountIDBox, 
+	private JTextField firstNameBox, lastNameBox, balanceBox, accountIDBox2, withdrawalBox, accountIDBox, 
 	depositBox, accountBalanceBox, deleteAccountBox;
 	
 	// Bank object that stores and manages accounts
-	Bank easySave = new Bank();
+	private Bank easySave = new Bank();
 
-	Timer timer = new Timer();
+	private Timer timer = new Timer();
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					LocalBank window = new LocalBank();
 					window.frmLocalbank.setVisible(true);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -86,14 +93,16 @@ public class LocalBank implements ActionListener{
 	/**
 	 * Create the application.
 	 */
-	public LocalBank() {
+	public LocalBank() 
+	{
 		initialize(); //Runs program
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		//---------------------------------------------------------------------------------------
 		//MAIN WINDOW CONTENTS:
 		
@@ -736,7 +745,8 @@ public class LocalBank implements ActionListener{
 	// Method to control visibility of main menu components
 		// - When "stat" = true, shows menu
 		// - When "stat" = false, hides menu
-	private void mainVisibility(boolean stat) {
+	private void mainVisibility(boolean stat) 
+	{
 		
 		buttonPanel.setVisible(stat);
 		withdrawalButton.setVisible(stat);
@@ -756,7 +766,8 @@ public class LocalBank implements ActionListener{
 	//---------------------------------------------------------------------------------------
 	
 	// Button click events:
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
 		
 		// Assigns click's action command to "event name"
 		String eventName = e.getActionCommand();
@@ -765,7 +776,8 @@ public class LocalBank implements ActionListener{
 		// ADD ACCOUNT PANEL ACTIONS:
 		
 		// If button event name equals add account
-		if (eventName.equals("addAccount")) {
+		if (eventName.equals("addAccount")) 
+		{
 			
 			// Hide main menu
 			mainVisibility(false);
@@ -797,10 +809,12 @@ public class LocalBank implements ActionListener{
 		}
 		
 		// If button event name equals create account
-		if (eventName.equals("createAccount")) {
+		if (eventName.equals("createAccount")) 
+		{
 			
 			// Try to perform action
-			try {
+			try 
+			{
 				errorLabel.setVisible(false);
 				
 				// Get input from user
@@ -831,14 +845,17 @@ public class LocalBank implements ActionListener{
 				
 			}
 			// Catch errors (such as incorrect format/ info provided)
-			catch(Exception e1){ 
+			catch(Exception e1)
+			{ 
 				
 				// Display error message
 				errorLabel.setVisible(true);	
 				
 				// After 2 seconds, revert error label visibility
-				timer.schedule(new TimerTask() {
-				    public void run() {
+				timer.schedule(new TimerTask() 
+				{
+				    public void run() 
+				    {
 				    	errorLabel.setVisible(false);
 				    }
 				    
@@ -849,7 +866,8 @@ public class LocalBank implements ActionListener{
 		// RETURN BUTTON ACTIONS:
 		
 		// If button name is equal to return
-		if (eventName.equals("return")) {
+		if (eventName.equals("return")) 
+		{
 			
 			// Show main menu
 			mainVisibility(true);
@@ -866,7 +884,8 @@ public class LocalBank implements ActionListener{
 		//REMOVE ACCOUNT PANEL ACTIONS:
 		
 		// If button event name is equal to remove account
-		if (eventName.equals("removeAccount")) {
+		if (eventName.equals("removeAccount")) 
+		{
 			
 			// Hide main menu
 			mainVisibility(false);
@@ -879,7 +898,8 @@ public class LocalBank implements ActionListener{
 		}
 		
 		// If button event name is equal to delete account
-		if (eventName.equals("deleteAccount")) {
+		if (eventName.equals("deleteAccount")) 
+		{
 			
 			// Get input from user
 			ID = deleteAccountBox.getText();
@@ -892,8 +912,10 @@ public class LocalBank implements ActionListener{
 			deleteAccountBox.setText("");
 			
 			// Remove result message after 1 second
-			timer.schedule(new TimerTask() {
-			    public void run() {
+			timer.schedule(new TimerTask() 
+			{
+			    public void run() 
+			    {
 			    	accountDeletedText.setText("");
 			    }
 			    
@@ -904,7 +926,8 @@ public class LocalBank implements ActionListener{
 		// DEPOSIT ACCOUNT PANEL ACTIONS:
 		
 		//If button event name is equal to deposit
-		if (eventName.equals("deposit")) {
+		if (eventName.equals("deposit")) 
+		{
 			
 			// Set button's command back to original
 			depositAccountButton.setActionCommand("depositAccount");
@@ -937,10 +960,12 @@ public class LocalBank implements ActionListener{
 		}
 		
 		// If button event name is equal to deposit
-		if(eventName.equals("depositAccount")) {
+		if(eventName.equals("depositAccount")) 
+		{
 			
 			// Try to perform action
-			try {
+			try 
+			{
 				
 				// Get input from user
 				ID = accountIDBox.getText();
@@ -966,7 +991,8 @@ public class LocalBank implements ActionListener{
 				errorLabel2.setVisible(false);
 				
 				// If account was not found
-				if(successDepositLabel.getText()== "Account does not exist.") {
+				if(successDepositLabel.getText()== "Account does not exist.") 
+				{
 					
 					// Reposition label to center
 					successDepositLabel.setBounds(90, 32, 250, 146);
@@ -978,8 +1004,10 @@ public class LocalBank implements ActionListener{
 					title3.setVisible(false);
 					
 					// After 1 second, revert panel back to before transaction was performed
-					timer.schedule(new TimerTask() {
-					    public void run() {
+					timer.schedule(new TimerTask() 
+					{
+					    public void run() 
+					    {
 					    	
 					    	successDepositLabel.setText("");
 					    	
@@ -1006,7 +1034,8 @@ public class LocalBank implements ActionListener{
 					}, 1000);
 				}
 				// If transaction was successful
-				else {
+				else 
+				{
 					
 					// Change button's action command to ensure user does not duplicate transaction 
 					depositAccountButton.setActionCommand("stop");
@@ -1014,14 +1043,17 @@ public class LocalBank implements ActionListener{
 			}
 			
 			// Catch errors (such as incorrect format/ info provided)
-			catch(Exception e1) {
+			catch(Exception e1) 
+			{
 				
 				// Display error message
 				errorLabel2.setVisible(true);
 				
 				// Hide after 1 second
-				timer.schedule(new TimerTask() {
-				    public void run() {
+				timer.schedule(new TimerTask() 
+				{
+				    public void run() 
+				    {
 				    	errorLabel2.setVisible(false);
 				    }
 				    
@@ -1034,7 +1066,8 @@ public class LocalBank implements ActionListener{
 		// WITHDRAWAL PANEL ACTIONS:
 		
 		// If button event name equals withdrawal
-		if (eventName.equals("withdrawal")) {
+		if (eventName.equals("withdrawal")) 
+		{
 			
 			// Set button's command back to original
 			withdrawalAccountButton.setActionCommand("withdrawalAccount");
@@ -1067,10 +1100,12 @@ public class LocalBank implements ActionListener{
 		}
 		
 		// If button event name equals withdrawal account
-		if(eventName.equals("withdrawalAccount")) {
+		if(eventName.equals("withdrawalAccount")) 
+		{
 			
 			// Try to perform action
-			try {
+			try 
+			{
 				
 				// Get input from user
 				ID = accountIDBox2.getText();
@@ -1097,7 +1132,8 @@ public class LocalBank implements ActionListener{
 				
 				// If transaction resulted in account not existing, or inadequate funds,
 				if((successWithdrawalLabel.getText()== "Account does not exist.")|| 
-				(successWithdrawalLabel.getText()== "Not enough funds in account.") ) {
+				(successWithdrawalLabel.getText()== "Not enough funds in account.") ) 
+				{
 					
 					// hide info labels to isolate message
 					successWithdrawalLabel.setBounds(80, 32, 250, 146);
@@ -1107,8 +1143,10 @@ public class LocalBank implements ActionListener{
 					title32.setVisible(false);
 					
 					// After 1 second, revert panel back to before transaction
-					timer.schedule(new TimerTask() {
-					    public void run() {
+					timer.schedule(new TimerTask() 
+					{
+					    public void run() 
+					    {
 					    	
 					    	successWithdrawalLabel.setText("");
 					    	
@@ -1135,20 +1173,24 @@ public class LocalBank implements ActionListener{
 				}
 				
 				// If transaction was successful, change button's action command to prevent duplicate withdrawals
-				else {
+				else 
+				{
 					withdrawalAccountButton.setActionCommand("stop");
 				}
 				
 			}
 			// Catch errors (such as incorrect format/ info provided)
-			catch(Exception e1) {
+			catch(Exception e1) 
+			{
 				
 				// Show error message
 				errorLabel3.setVisible(true);
 				
 				// Hide after 1 second
-				timer.schedule(new TimerTask() {
-				    public void run() {
+				timer.schedule(new TimerTask() 
+				{
+				    public void run() 
+				    {
 				    	errorLabel3.setVisible(false);
 				    }
 				}, 1000);
@@ -1159,7 +1201,8 @@ public class LocalBank implements ActionListener{
 		// BALANCE PANEL ACTIONS:
 		
 		// If button event name equals balance
-		if (eventName.equals("balance")) {
+		if (eventName.equals("balance")) 
+		{
 			
 			// Hide main menu
 			mainVisibility(false);
@@ -1172,7 +1215,8 @@ public class LocalBank implements ActionListener{
 		}
 		
 		// If button event name equals check balance
-		if(eventName.equals("checkBalance")) {
+		if(eventName.equals("checkBalance")) 
+		{
 			
 			// Get input from user
 			ID = accountBalanceBox.getText();
@@ -1189,7 +1233,8 @@ public class LocalBank implements ActionListener{
 			successBalanceLabel.setBounds(83, 8, 211, 82);
 			
 			// If account was not found, hide info labels to isolate message
-			if(successBalanceLabel.getText()== "Account does not exist.") {
+			if(successBalanceLabel.getText()== "Account does not exist.") 
+			{
 				successBalanceLabel.setBounds(63, 8, 211, 82);
 				title12_1.setVisible(false);
 				title22_1.setVisible(false);

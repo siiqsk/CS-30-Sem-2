@@ -40,25 +40,28 @@ public class TicTacToe implements ActionListener {
 	private ImageIcon cat, catDance, cat2, hamster;
 	private JPanel mainPanel, boardPanel, gamePanel;
 	private JButton playButton, humanButton, compButton, catMode, resetButton;
-	JButton space[][] = new JButton[3][3];
-	String player1, player2, gameMode, currPlayer, boxNum, humanSpot, computerSpot;
-	int movesMade;
-	String winner = " ";
+	private JButton space[][] = new JButton[3][3];
+	private String player1, player2, gameMode, currPlayer, boxNum, humanSpot, computerSpot;
+	private int movesMade;
+	private String winner = " ";
 	
-	Boolean gameOn = false;
-	Boolean catOn = false;
+	private Boolean gameOn = false;
+	private Boolean catOn = false;
 	
 	private JLabel playerTurn, turnStat;
-	Timer timer = new Timer();
+	private Timer timer = new Timer();
 
 	// Method to initialize TicTacToe Board
-	public void board() {
+	public void board() 
+	{
 		
 		// for every element of i (row)
-		for (int i = 0; i < space.length; i++) {
+		for (int i = 0; i < space.length; i++) 
+		{
 			
 			// for every element of t (column)
-			for(int t = 0; t< space[0].length; t++) {
+			for(int t = 0; t< space[0].length; t++) 
+			{
 			
 			// Create new J Button + set action command to box + #
 			space[i][t] = new JButton(" ");
@@ -77,13 +80,19 @@ public class TicTacToe implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					TicTacToe window = new TicTacToe();
 					window.frmTictactoe.setVisible(true);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -94,7 +103,8 @@ public class TicTacToe implements ActionListener {
 	 * Create the application.
 	 */
 	
-	public TicTacToe() {
+	public TicTacToe() 
+	{
 		initialize(); //Create program
 		board(); // Initialize board
 	}
@@ -102,7 +112,8 @@ public class TicTacToe implements ActionListener {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		
 		// Initialize image icons 
 		cat2 = new ImageIcon("../Chapter10/src/Mastery/tofu.jpg");
@@ -218,19 +229,23 @@ public class TicTacToe implements ActionListener {
 	
 	}
 	
-//When a button is pressed
-public void actionPerformed(ActionEvent e) {
+	//When a button is pressed
+	public void actionPerformed(ActionEvent e) 
+	{
 		
 	//Set button's action command to variable "eventName"
 		String eventName = e.getActionCommand();
 		
 		// If button event name is equal to reset:
-		if(eventName.equals("reset")) {
+		if(eventName.equals("reset")) 
+		{
 			
 			// Remove all buttons on the board
-			for (int i = 0; i < space.length; i++) {
+			for (int i = 0; i < space.length; i++) 
+			{
 				
-				for(int t = 0; t< space[0].length; t++) {
+				for(int t = 0; t< space[0].length; t++) 
+				{
 					
 					boardPanel.remove(space[i][t]);
 					
@@ -261,10 +276,12 @@ public void actionPerformed(ActionEvent e) {
 		}
 		
 		// If game is not active:
-		if (gameOn == false) {
+		if (gameOn == false) 
+		{
 			
 			// If button event name is equal to human
-			if (eventName.equals("human")) {
+			if (eventName.equals("human")) 
+			{
 				
 				// Set game mode to human
 				gameMode = ("human");
@@ -275,7 +292,8 @@ public void actionPerformed(ActionEvent e) {
 			}
 			
 			// Else if button event name is equal to computer:
-			else if (eventName.equals("computer")){
+			else if (eventName.equals("computer"))
+			{
 				
 				//Set game mode to computer
 				gameMode = ("computer");
@@ -286,7 +304,8 @@ public void actionPerformed(ActionEvent e) {
 			}
 			
 			//If button event name is equal to cat mode
-			if (eventName.equals("catModeOn")) {
+			if (eventName.equals("catModeOn")) 
+			{
 				
 				// Set cat mode to on
 				catOn = true;
@@ -300,7 +319,8 @@ public void actionPerformed(ActionEvent e) {
 			}
 			
 			// If button event name is equal to cat mode off
-			else if (eventName.equals("catModeOff")) {
+			else if (eventName.equals("catModeOff")) 
+			{
 				
 				// Set cat mode to off
 				catOn = false;
@@ -314,7 +334,8 @@ public void actionPerformed(ActionEvent e) {
 			}
 			
 			// If button event name is equal to play
-			if(eventName.equals("play")) {
+			if(eventName.equals("play")) 
+			{
 				
 				//Set game to active
 				gameOn=true;
@@ -342,13 +363,16 @@ public void actionPerformed(ActionEvent e) {
 			}
 		}	
 		// If game is active
-		if (gameOn == true) {
+		if (gameOn == true) 
+		{
 			
 			// If button event name includes "box" (representing any button clicked)
-			if (eventName.contains("box")) {
+			if (eventName.contains("box")) 
+			{
 		
 				// If the game mode is set to human
-				if (gameMode.equals("human")){
+				if (gameMode.equals("human"))
+				{
 					
 					// Set human spot equal to button event name
 					humanSpot = eventName;
@@ -359,7 +383,8 @@ public void actionPerformed(ActionEvent e) {
 				}
 				
 				//If the game mode is set to computer
-				if(gameMode.equals("computer")) {
+				if(gameMode.equals("computer")) 
+				{
 					
 					// Set human spot equal to button event name
 					humanSpot = eventName;
@@ -368,7 +393,8 @@ public void actionPerformed(ActionEvent e) {
 					moves(humanSpot, computerSpot);
 					
 					// If winner is not determined, and turn is set to player 2
-					if (winner.equals(" ") && turnStat.getText().equals("player: " + player2)) {
+					if (winner.equals(" ") && turnStat.getText().equals("player: " + player2)) 
+					{
 						
 						// Change player turn label to computer
 						turnStat.setText("computer");
@@ -378,11 +404,14 @@ public void actionPerformed(ActionEvent e) {
 			}
 			
 			// In computer mode, if current player is equal to 2, and winner is not determined,
-			if ((currPlayer == player2) && gameMode.equals("computer") && winner.equals(" ")){
+			if ((currPlayer == player2) && gameMode.equals("computer") && winner.equals(" "))
+			{
 				
 				// After 0.4 second, perform computer turn method, and perform moves method
-				timer.schedule(new TimerTask() {
-				    public void run() {
+				timer.schedule(new TimerTask() 
+				{
+				    public void run() 
+				    {
 		
 				    	computerTurn();
 				    	moves(humanSpot, computerSpot);
@@ -397,180 +426,203 @@ public void actionPerformed(ActionEvent e) {
 		}
 	}
 
-//Method to determine computer spot in computer game mode
-private void computerTurn() {
-	
-	// While current player is equal to 2
-	while (currPlayer == player2) {
+	//Method to determine computer spot in computer game mode
+	private void computerTurn() 
+	{
 		
-		// Choose random row + column (spot on board)
-		int i = (int)(3*Math.random()); 
-		int t = (int)(3*Math.random()); 
-		
-		// Set computer spot to box + #
-		computerSpot = "box" + i + t;
-		
-		// Only when spot is empty (no text is in chosen box),
-		if ((space[i][t]).getText() == (" ")) {
+		// While current player is equal to 2
+		while (currPlayer == player2) 
+		{
 			
-			// Stop method
-			break;
+			// Choose random row + column (spot on board)
+			int i = (int)(3*Math.random()); 
+			int t = (int)(3*Math.random()); 
+			
+			// Set computer spot to box + #
+			computerSpot = "box" + i + t;
+			
+			// Only when spot is empty (no text is in chosen box),
+			if ((space[i][t]).getText() == (" ")) 
+			{
+				
+				// Stop method
+				break;
+			}
 		}
 	}
-}
 
-// Method to prompt user for a move until a valid move has been made.
-// Creates a mark in the player's chosen square
-private void moves(String spotP1, String spotP2) {
-	
-	
-	// If total moves are less than or equal to 9, and winner is not determined
-	if ((movesMade <= 9) && (winner == " ")) {
+	// Method to prompt user for a move until a valid move has been made.
+	// Creates a mark in the player's chosen square
+	private void moves(String spotP1, String spotP2) 
+	{
 		
-		// Set player marks
-		player1 = "x";
-		player2 = "o";
 		
-		// If current player is player 1
-		if (currPlayer == player1) {
+		// If total moves are less than or equal to 9, and winner is not determined
+		if ((movesMade <= 9) && (winner == " ")) 
+		{
 			
-			// Set variable to player button event name
-			boxNum = spotP1;
+			// Set player marks
+			player1 = "x";
+			player2 = "o";
+			
+			// If current player is player 1
+			if (currPlayer == player1) 
+			{
+				
+				// Set variable to player button event name
+				boxNum = spotP1;
+			}
+			
+			// Else if current player is player 2
+			else 
+			{
+				
+				// Set variable to player2 button event name
+				boxNum = spotP2;
+				
+			}
+			
+			// for the row, take the 3rd character of variable "boxNum"
+	        int i = boxNum.charAt(3) - '0';
+	        
+	        // for the column, take the 3rd character of variable "boxNum"
+	        int t = boxNum.charAt(4) - '0';
+	
+	        // If chosen space is empty
+	        if ((space[i][t].getText().equals(" ")))
+	        {
+	        	
+	        	// + 1 to moves made
+	        	movesMade++;
+	        	
+	        	// If cat mode is off,
+	        	if (catOn == false) 
+	        	{
+	        		
+	        		// Set the button's text to the mark of the current player
+	        		space[i][t].setFont(new Font("Yuanti SC", Font.BOLD, 45));
+	        		space[i][t].setText(currPlayer);
+	   
+	        	// Else, if cat mode is on,
+	            } 
+	        	else 
+	        	{
+	            	
+	            	// If the current player is 1
+	            	if (currPlayer == player1) 
+	            	{
+	            		
+	            		// Set button text to mark of current player, and set icon to cat1
+	            		space[i][t].setText(currPlayer);
+	            		space[i][t].setIcon(cat);
+	            	
+	            	// else if the current player is 2
+	            	}
+	            	else
+	            	{
+	            		
+	            		// Set button text to mark of current player, and set icon to cat2
+	            		space[i][t].setText(currPlayer);
+	            		space[i][t].setIcon(cat2);
+	            	}
+	          
+	            }
+	        	
+	        	// If the current player is 1
+	            if (currPlayer.equals(player1)) 
+	            {
+	            	
+	            	// After move is made, set current player to 2
+	                currPlayer = player2;
+	               
+	            // Else, do the opposite
+	            } 
+	            else
+	            {
+	            	
+	                currPlayer = player1;
+	                
+	            }
+	            
+	            // Update turn stat label to reflect current player
+	            turnStat.setText("player: " + currPlayer);
+	        }
+	    }
+		
+		// Check if there is a winner after every turn using method
+		winner();
+	}
+
+	// Method to determine winner
+	private void winner() 
+	{
+		
+		//Test rows of board to see if any match up
+		for (int i = 0; i < space.length; i ++) 
+		{
+			
+			if(((space[i][0]).getText()).equals((space[i][1]).getText()) &&
+			(space[i][1].getText()).equals ((space[i][2]).getText()) &&
+			!((space[i][0].getText().equals(" ")))) 
+			{
+				
+				winner = ((space[i][0]).getText()) + " WINS ! ";
+			
+			}
+			
 		}
 		
-		// Else if current player is player 2
-		else {
+		//Test columns of board to see if any match up
+		for (int t = 0; t < space[0].length; t ++) 
+		{
 			
-			// Set variable to player2 button event name
-			boxNum = spotP2;
+			if(((space[0][t]).getText()).equals((space[1][t]).getText()) &&
+			(space[1][t].getText()).equals ((space[2][t]).getText()) &&
+			!((space[0][t].getText().equals(" ")))) 
+			{
+				winner = ((space[0][t]).getText()) + " WINS ! ";
+			}
+		}
 			
+		//Test diagonal of board to see if any match up
+		if	(((space[0][0]).getText()).equals((space[1][1]).getText()) &&
+			(space[1][1].getText()).equals ((space[2][2]).getText()) &&
+			!((space[0][0].getText().equals(" ")))) 
+		{
+			winner = ((space[0][0]).getText()) + " WINS ! ";
+		}
+	
+		//Test other diagonal of board to see if any match up
+		if	(((space[0][2]).getText()).equals((space[1][1]).getText()) &&
+			(space[1][1].getText()).equals ((space[2][0]).getText()) &&
+			!((space[0][2].getText().equals(" ")))) 
+		{
+			winner = ((space[0][2]).getText()) + " WINS ! ";
 		}
 		
-		// for the row, take the 3rd character of variable "boxNum"
-        int i = boxNum.charAt(3) - '0';
-        
-        // for the column, take the 3rd character of variable "boxNum"
-        int t = boxNum.charAt(4) - '0';
-
-        // If chosen space is empty
-        if ((space[i][t].getText().equals(" "))){
-        	
-        	// + 1 to moves made
-        	movesMade++;
-        	
-        	// If cat mode is off,
-        	if (catOn == false) {
-        		
-        		// Set the button's text to the mark of the current player
-        		space[i][t].setFont(new Font("Yuanti SC", Font.BOLD, 45));
-        		space[i][t].setText(currPlayer);
-   
-        	// Else, if cat mode is on,
-            } else {
-            	
-            	// If the current player is 1
-            	if (currPlayer == player1) {
-            		
-            		// Set button text to mark of current player, and set icon to cat1
-            		space[i][t].setText(currPlayer);
-            		space[i][t].setIcon(cat);
-            	
-            	// else if the current player is 2
-            	}else {
-            		
-            		// Set button text to mark of current player, and set icon to cat2
-            		space[i][t].setText(currPlayer);
-            		space[i][t].setIcon(cat2);}
-          
-            }
-        	
-        	// If the current player is 1
-            if (currPlayer.equals(player1)) {
-            	
-            	// After move is made, set current player to 2
-                currPlayer = player2;
-               
-            // Else, do the opposite
-            } else {
-            	
-                currPlayer = player1;
-                
-            }
-            
-            // Update turn stat label to reflect current player
-            turnStat.setText("player: " + currPlayer);
-        }
-    }
-	
-	// Check if there is a winner after every turn using method
-	winner();
-}
-
-// Method to determine winner
-private void winner() {
-	
-	//Test rows of board to see if any match up
-	for (int i = 0; i < space.length; i ++) {
-		
-		if(((space[i][0]).getText()).equals((space[i][1]).getText()) &&
-		(space[i][1].getText()).equals ((space[i][2]).getText()) &&
-		!((space[i][0].getText().equals(" ")))) {
-			
-		winner = ((space[i][0]).getText()) + " WINS ! ";
-		
+		// If 9 moves are made, and winner is undetermined
+		if ((movesMade == 9) && (winner.equals(" ")))
+		{	
+			// Set winner to draw
+			winner = ("  DRAW !");	
 		}
 		
-	}
-	
-	//Test columns of board to see if any match up
-	for (int t = 0; t < space[0].length; t ++) {
+		// In computer mode, if winner is player 2, 
+		if ((winner.equals(player2 + " WINS ! ")) && gameMode.equals("computer")) 
+		{
+			// Change winner output to "computer"
+			winner = "CP WINS !";
+		}
 		
-		if(((space[0][t]).getText()).equals((space[1][t]).getText()) &&
-		(space[1][t].getText()).equals ((space[2][t]).getText()) &&
-		!((space[0][t].getText().equals(" ")))) {
-			
-		winner = ((space[0][t]).getText()) + " WINS ! ";}
-	}
-		
-	//Test diagonal of board to see if any match up
-	if	(((space[0][0]).getText()).equals((space[1][1]).getText()) &&
-		(space[1][1].getText()).equals ((space[2][2]).getText()) &&
-		!((space[0][0].getText().equals(" ")))) {
-			
-		winner = ((space[0][0]).getText()) + " WINS ! ";}
-
-	//Test other diagonal of board to see if any match up
-	if	(((space[0][2]).getText()).equals((space[1][1]).getText()) &&
-		(space[1][1].getText()).equals ((space[2][0]).getText()) &&
-		!((space[0][2].getText().equals(" ")))) {
-			
-		winner = ((space[0][2]).getText()) + " WINS ! ";}
-	
-	// If 9 moves are made, and winner is undetermined
-	if ((movesMade == 9) && (winner.equals(" "))){
-		
-		// Set winner to draw
-		winner = ("  DRAW !");
-		
-	}
-	
-	// In computer mode, if winner is player 2, 
-	if ((winner.equals(player2 + " WINS ! ")) && gameMode.equals("computer")) {
-		
-		// Change winner output to "computer"
-		winner = "CP WINS !";
-		
-	}
-	
-	// If a winner is determined
-	if (winner != " ") {
-		
-		// Display result to user
-		playerTurn.setVisible(false);
-		turnStat.setText(winner);
-		turnStat.setFont(new Font("Silom", Font.PLAIN, 30));
-							
-	}
+		// If a winner is determined
+		if (winner != " ") 
+		{
+			// Display result to user
+			playerTurn.setVisible(false);
+			turnStat.setText(winner);
+			turnStat.setFont(new Font("Silom", Font.PLAIN, 30));
+								
+		}
 	}
 }
 	
